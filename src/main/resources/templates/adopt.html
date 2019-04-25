@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>MonkeyWorld</title>
+<link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+	<h1>Monkeys available for adoption</h1>
+
+	<table>
+		<tr>
+			<th>Collar Id</th>
+			<th>Species</th>
+			<th>Pet Name</th>
+			<th>Price</th>
+		</tr>
+		<tr th:each="monkey : ${monkies}">
+			<td th:text="${monkey.id}"></td>
+			<td th:text="${monkey.species}"></td>
+			<td th:text="${monkey.name}"></td>
+			<td th:text="${monkey.price}"></td>
+			
+			
+		</tr>
+	</table>
+</body>
+</html>
