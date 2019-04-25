@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "8a83b2ae-d58c-46fc-8ccc-6873aa4523af",
+		"name": "Chaos Monkey Experiment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get CM configuration",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey"
+					]
+				},
+				"description": "Running Chaos Monkey configuration"
+			},
+			"response": []
+		},
+		{
+			"name": "Get CM status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"status"
+					]
+				},
+				"description": "Is Chaos Monkey enabled or disabled?"
+			},
+			"response": []
+		},
+		{
+			"name": "Enable CM",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/enable",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"enable"
+					]
+				},
+				"description": "Enable Chaos Monkey"
+			},
+			"response": []
+		},
+		{
+			"name": "Disable CM",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/disable",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"disable"
+					]
+				},
+				"description": "Disable Chaos Monkey"
+			},
+			"response": []
+		},
+		{
+			"name": "Active CM watchers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/watcher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"watcher"
+					]
+				},
+				"description": "Get running Watcher configuration.\n\nNOTE: Watcher cannot be changed at runtime, they are Spring AOP components that have to be created when the application starts."
+			},
+			"response": []
+		},
+		{
+			"name": "Get CM assaults configurations ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/assaults",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"assaults"
+					]
+				},
+				"description": "Get running Assaults configuration"
+			},
+			"response": []
+		},
+		{
+			"name": "Change CM assaults configuration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"level\": 5,\n\"latencyRangeStart\": 2000,\n\"latencyRangeEnd\": 5000,\n\"latencyActive\": true,\n\"exceptionsActive\": true,\n\"killApplicationActive\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/chaosmonkey/assaults",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"chaosmonkey",
+						"assaults"
+					]
+				},
+				"description": "Change Assaults configuration"
+			},
+			"response": []
+		},
+		{
+			"name": "Hit a rest endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "361867d6-e28b-44e1-890f-7762b02292b5",
+						"exec": [
+							"pm.test(\"Response time is less than 100ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/monkeys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monkeys"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
